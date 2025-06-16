@@ -61,7 +61,6 @@ def update_short_url_details(
     url: ShortUrlBySlug,
     short_url_in: ShortUrlUpdate,
 ) -> ShortUrl:
-    log.info("added background task for saving state")
     return storage.update(
         short_url=url,
         short_url_in=short_url_in,
@@ -76,7 +75,6 @@ def update_short_url_details_partial(
     url: ShortUrlBySlug,
     short_url_in: ShortUrlPartialUpdate,
 ) -> ShortUrl:
-    log.info("added background task for saving state")
     return storage.update_partial(
         short_url=url,
         short_url_in=short_url_in,
@@ -91,4 +89,3 @@ def delete_short_url(
     url: ShortUrlBySlug,
 ) -> None:
     storage.delete(short_url=url)
-    log.info("added background task for saving state")
