@@ -6,7 +6,10 @@ from fastapi import (
     Depends,
 )
 
-from api.api_v1.short_urls.dependencies import save_storage_state
+from api.api_v1.short_urls.dependencies import (
+    save_storage_state,
+    api_token_required,
+)
 from schemas.short_url import (
     ShortUrl,
     ShortUrlCreate,
@@ -40,5 +43,6 @@ def read_short_url_list() -> list[ShortUrl]:
 )
 def create_short_url(
     short_url_crate: ShortUrlCreate,
+    _=Depends(api_token_required),
 ) -> ShortUrl:
     return storage.create(short_url_crate)
