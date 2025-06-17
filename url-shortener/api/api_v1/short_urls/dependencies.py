@@ -5,7 +5,7 @@ from fastapi import (
     HTTPException,
     BackgroundTasks,
     Request,
-    Query,
+    Header,
 )
 from starlette import status
 
@@ -57,7 +57,7 @@ def api_token_required_for_unsafe_methods(
     request: Request,
     api_token: Annotated[
         str,
-        Query(),
+        Header(alias="x-auth-token"),
     ] = "",
 ):
     if request.method not in UNSAFE_METHODS:
