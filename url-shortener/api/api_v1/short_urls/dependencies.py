@@ -97,12 +97,16 @@ def api_token_required_for_unsafe_methods(
         )
 
 
-def user_basic_auth_required(
+def user_basic_auth_required_for_unsafe_methods(
+    request: Request,
     credentials: Annotated[
         HTTPBasicCredentials | None,
         Depends(user_basic_auth),
     ] = None,
 ):
+    if request.method not in UNSAFE_METHODS:
+        return
+
     log.info("user auth credentials: %s", credentials)
     if (
         credentials
