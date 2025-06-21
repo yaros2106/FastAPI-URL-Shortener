@@ -17,7 +17,6 @@ from fastapi.security import (
 
 from core.config import (
     USERS_DB,
-    REDIS_TOKENS_SET_NAME,
 )
 from schemas.short_url import ShortUrl
 
@@ -128,10 +127,7 @@ def validate_basic_auth(
 def validate_api_token(
     api_token: HTTPAuthorizationCredentials,
 ):
-    if redis_tokens.sismember(
-        REDIS_TOKENS_SET_NAME,
-        api_token.credentials,
-    ):
+    if redis_tokens.token_exists(token=api_token.credentials):
         return
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
