@@ -15,14 +15,13 @@ from fastapi.security import (
     HTTPBasicCredentials,
 )
 
-from core.config import (
-    USERS_DB,
-)
 from schemas.short_url import ShortUrl
 
+from api.api_v1.auth.services import (
+    redis_tokens,
+    redis_users,
+)
 from .crud import storage
-from .redis import redis_tokens
-
 
 log = logging.getLogger(__name__)
 
@@ -109,10 +108,9 @@ def user_basic_auth_required_for_unsafe_methods(
 def validate_basic_auth(
     credentials: HTTPBasicCredentials | None,
 ):
-    if (
-        credentials
-        and credentials.username in USERS_DB
-        and credentials.password == USERS_DB[credentials.username]
+    if credentials and redis_users.validate_user_password(
+        username=credentials.username,
+        password=credentials.password,
     ):
         log.info("username: %s is logged in", credentials.username)
         return

@@ -11,16 +11,10 @@ LOG_FORMAT: str = (
 )
 
 
-# demo
-USERS_DB: dict[str, str] = {
-    # username: password
-    "sam": "password",
-    "yar": "qwerty",
-}
-
 REDIS_HOST = "localhost"
 REDIS_PORT = 6379
 REDIS_DB = 0
 REDIS_DB_TOKENS = 1
+REDIS_DB_USERS = 2
 
 REDIS_TOKENS_SET_NAME = "tokens"
