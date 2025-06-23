@@ -4,7 +4,9 @@ from pydantic import (
     BaseModel,
     ValidationError,
 )
+from redis import Redis
 
+from core import config
 from core.config import SHORT_URL_STORAGE_FILEPATH
 from schemas.short_url import (
     ShortUrl,
@@ -14,6 +16,13 @@ from schemas.short_url import (
 )
 
 log = logging.getLogger(__name__)
+
+redis = Redis(
+    host=config.REDIS_HOST,
+    port=config.REDIS_PORT,
+    db=config.REDIS_DB_SHORT_URLS,
+    decode_responses=True,
+)
 
 
 class ShortUrlsStorage(BaseModel):
@@ -54,7 +63,11 @@ class ShortUrlsStorage(BaseModel):
         short_url = ShortUrl(
             **short_url_in.model_dump(),
         )
-        self.slug_to_short_url[short_url_in.slug] = short_url
+        redis.hset(
+            name=config.REDIS_SHORT_URLS_HASH_NAME,
+            key=short_url.slug,
+            value=short_url_in.model_dump_json(),
+        )
         log.info("Created short url %s", short_url)
         return short_url
 
