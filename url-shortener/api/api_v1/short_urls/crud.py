@@ -53,6 +53,13 @@ class ShortUrlsStorage(BaseModel):
         )
         log.warning("Recovered data from storage file")
 
+    def save_short_url(self, short_url: ShortUrl) -> None:
+        redis.hset(
+            name=config.REDIS_SHORT_URLS_HASH_NAME,
+            key=short_url.slug,
+            value=short_url.model_dump_json(),
+        )
+
     def get(self) -> list[ShortUrl]:
         data = redis.hvals(name=config.REDIS_SHORT_URLS_HASH_NAME)
         return [ShortUrl.model_validate_json(film) for film in data]
@@ -68,11 +75,7 @@ class ShortUrlsStorage(BaseModel):
         short_url = ShortUrl(
             **short_url_in.model_dump(),
         )
-        redis.hset(
-            name=config.REDIS_SHORT_URLS_HASH_NAME,
-            key=short_url.slug,
-            value=short_url_in.model_dump_json(),
-        )
+        self.save_short_url(short_url)
         log.info("Created short url %s", short_url)
         return short_url
 
@@ -89,6 +92,7 @@ class ShortUrlsStorage(BaseModel):
     ) -> ShortUrl:
         for field_name, value in short_url_in:
             setattr(short_url, field_name, value)
+        self.save_short_url(short_url)
         return short_url
 
     def update_partial(
@@ -98,6 +102,7 @@ class ShortUrlsStorage(BaseModel):
     ) -> ShortUrl:
         for field_name, value in short_url_in.model_dump(exclude_unset=True).items():
             setattr(short_url, field_name, value)
+        self.save_short_url(short_url)
         return short_url
 
 
