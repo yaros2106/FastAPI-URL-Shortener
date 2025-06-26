@@ -18,8 +18,7 @@ from schemas.short_url import (
     ShortUrlRead,
 )
 
-from api.api_v1.short_urls.crud import storage
-
+from api.api_v1.short_urls.crud import storage, ShortUrlAlreadyExists
 
 log = logging.getLogger(__name__)
 
@@ -73,9 +72,10 @@ def read_short_url_list() -> list[ShortUrl]:
 def create_short_url(
     short_url_create: ShortUrlCreate,
 ) -> ShortUrl:
-    if not storage.get_by_slug(short_url_create.slug):
-        return storage.create(short_url_create)
-    raise HTTPException(
-        status_code=status.HTTP_409_CONFLICT,
-        detail=f"Short URL with slug={short_url_create.slug!r} already exists.",
-    )
+    try:
+        return storage.create_or_raise_if_exists(short_url_create)
+    except ShortUrlAlreadyExists:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=f"Short URL with slug={short_url_create.slug!r} already exists.",
+        )
