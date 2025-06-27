@@ -33,7 +33,7 @@ class ShortUrlBaseError(Exception):
 
 class ShortUrlAlreadyExists(ShortUrlBaseError):
     """
-    Raised when a short url creation already exists
+    Raised when a short url on creation already exists
     """
 
 
