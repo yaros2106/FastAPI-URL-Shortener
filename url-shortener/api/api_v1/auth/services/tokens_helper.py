@@ -39,6 +39,13 @@ class AbstractTokensHelper(ABC):
         :return:
         """
 
+    def delete_token(self, token: str) -> None:
+        """
+        Delete token from storage
+        :param token:
+        :return:
+        """
+
     @classmethod
     def generate_token(cls) -> str:
         return secrets.token_urlsafe(16)
