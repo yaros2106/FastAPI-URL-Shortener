@@ -25,7 +25,7 @@ def check(
         str,
         typer.Argument(help="The token to check."),
     ],
-):
+) -> None:
     print(
         f"Token [bold]{token}[/bold]",
         (
@@ -40,7 +40,7 @@ def check(
     name="list",
     help="[bold red]Get all existing tokens.[/bold red]",
 )
-def list_tokens():
+def list_tokens() -> None:
     all_tokens = tokens.get_tokens()
     if not tokens:
         print("[bold red]No tokens found.[/bold red]")
@@ -57,7 +57,7 @@ def list_tokens():
 @app.command(
     help="[bold red]Create and add a new token.[/bold red]",
 )
-def create():
+def create() -> None:
     new_token = tokens.generate_and_save_token()
     print(Panel(f"Created and added token: [green]{new_token}[/green]"))
 
@@ -70,7 +70,7 @@ def add(
         str,
         typer.Argument(help="Your token to add"),
     ],
-):
+) -> None:
     tokens.add_token(token)
     print(Panel(f"Token: [green]{token}[/green] added"))
 
@@ -83,7 +83,7 @@ def delete(
         str,
         typer.Argument(help="Your token to delete"),
     ],
-):
+) -> None:
     if not tokens.token_exists(token):
         print(f"[bold red]Token: [green]{token}[/green] not found.[/bold red]")
         return

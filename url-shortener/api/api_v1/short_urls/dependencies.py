@@ -67,7 +67,7 @@ def api_token_required_for_unsafe_methods(
         HTTPAuthorizationCredentials | None,
         Depends(static_api_token),
     ] = None,
-):
+) -> None:
     if request.method not in UNSAFE_METHODS:
         return
 
@@ -86,7 +86,7 @@ def user_basic_auth_required_for_unsafe_methods(
         HTTPBasicCredentials | None,
         Depends(user_basic_auth),
     ] = None,
-):
+) -> None:
     if request.method not in UNSAFE_METHODS:
         return
 
@@ -95,7 +95,7 @@ def user_basic_auth_required_for_unsafe_methods(
 
 def validate_basic_auth(
     credentials: HTTPBasicCredentials | None,
-):
+) -> None:
     if credentials and redis_users.validate_user_password(
         username=credentials.username,
         password=credentials.password,
@@ -112,7 +112,7 @@ def validate_basic_auth(
 
 def validate_api_token(
     api_token: HTTPAuthorizationCredentials,
-):
+) -> None:
     if redis_tokens.token_exists(token=api_token.credentials):
         return
     raise HTTPException(
@@ -131,7 +131,7 @@ def api_token_or_user_basic_auth_required_for_unsafe_methods(
         HTTPBasicCredentials | None,
         Depends(user_basic_auth),
     ] = None,
-):
+) -> None:
     if request.method not in UNSAFE_METHODS:
         return
 

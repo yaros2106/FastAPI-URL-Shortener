@@ -16,5 +16,5 @@ def hello(
         str,
         typer.Argument(help="Name to greet"),
     ],
-):
+) -> None:
     print(f"[bold]Hello, [green]{name}[/green][/bold]")

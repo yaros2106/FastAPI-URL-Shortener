@@ -13,7 +13,7 @@ class AbstractTokensHelper(ABC):
     @abstractmethod
     def token_exists(
         self,
-        token,
+        token: str,
     ) -> bool:
         """
         Check if token exists
@@ -24,7 +24,7 @@ class AbstractTokensHelper(ABC):
     @abstractmethod
     def add_token(
         self,
-        token,
+        token: str,
     ) -> None:
         """
         Save token into storage

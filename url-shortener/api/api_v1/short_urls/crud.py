@@ -59,9 +59,11 @@ class ShortUrlsStorage(BaseModel):
         return None
 
     def exists(self, slug: str) -> bool:
-        return redis.hexists(
-            name=config.REDIS_SHORT_URLS_HASH_NAME,
-            key=slug,
+        return bool(
+            redis.hexists(
+                name=config.REDIS_SHORT_URLS_HASH_NAME,
+                key=slug,
+            )
         )
 
     def create(self, short_url_in: ShortUrlCreate) -> ShortUrl:
