@@ -10,8 +10,10 @@ redis = Redis(
     decode_responses=True,
 )
 
-
-def main():
+def main() -> None:
+    a = 1
+    b = 2
+    print(a + b)
     print(redis.ping())
     redis.set("name", "yaros")
     redis.set("foo", "bar")
@@ -24,7 +26,7 @@ def main():
             redis.get("spam"),
         ]
     )
-    redis.getdel("foo")
+    print(redis.getdel("foo"))
 
 
 if __name__ == "__main__":
