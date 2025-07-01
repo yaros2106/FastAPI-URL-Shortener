@@ -4,20 +4,17 @@ from typing import Annotated
 from fastapi import (
     APIRouter,
     Depends,
-    BackgroundTasks,
 )
 from starlette import status
 
 from api.api_v1.short_urls.crud import storage
 from api.api_v1.short_urls.dependencies import prefetch_short_urls
-
 from schemas.short_url import (
     ShortUrl,
-    ShortUrlUpdate,
     ShortUrlPartialUpdate,
     ShortUrlRead,
+    ShortUrlUpdate,
 )
-
 
 log = logging.getLogger(__name__)
 

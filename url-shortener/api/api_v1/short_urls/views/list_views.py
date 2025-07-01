@@ -2,14 +2,13 @@ import logging
 
 from fastapi import (
     APIRouter,
-    status,
     Depends,
     HTTPException,
+    status,
 )
 
+from api.api_v1.short_urls.crud import storage
 from api.api_v1.short_urls.dependencies import (
-    api_token_required_for_unsafe_methods,
-    user_basic_auth_required_for_unsafe_methods,
     api_token_or_user_basic_auth_required_for_unsafe_methods,
 )
 from schemas.short_url import (
@@ -17,8 +16,6 @@ from schemas.short_url import (
     ShortUrlCreate,
     ShortUrlRead,
 )
-
-from api.api_v1.short_urls.crud import storage, ShortUrlAlreadyExists
 
 log = logging.getLogger(__name__)
 
@@ -74,7 +71,7 @@ def create_short_url(
 ) -> ShortUrl:
     try:
         return storage.create_or_raise_if_exists(short_url_create)
-    except ShortUrlAlreadyExists:
+    except storage.ShortUrlAlreadyExists:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail=f"Short URL with slug={short_url_create.slug!r} already exists.",

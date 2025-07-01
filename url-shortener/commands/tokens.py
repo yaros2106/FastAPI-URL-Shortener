@@ -1,13 +1,11 @@
-import typer
-
-from rich import print
 from typing import Annotated
 
-from rich.panel import Panel
+import typer
+from rich import print
 from rich.console import Console
+from rich.panel import Panel
 
 from api.api_v1.auth.services import redis_tokens as tokens
-
 
 app = typer.Typer(
     name="token",

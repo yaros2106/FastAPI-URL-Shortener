@@ -72,7 +72,12 @@ indent-width = 4
 target-version = "py313"
 
 [tool.ruff.lint]
-select = ["FAST"]
+select = [
+    "ANN",  # flake8-annotations (ANN)
+    "FAST",  # FastAPI (FAST)
+    "I",  # isort (I)
+    "F",  # Pyflakes (F)
+]
 ignore = []
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
