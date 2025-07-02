@@ -30,7 +30,7 @@ router = APIRouter(
                     },
                 },
             },
-        }
+        },
     },
 )
 

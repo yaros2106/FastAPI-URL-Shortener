@@ -1,4 +1,7 @@
-__all__ = ("storage",)
+__all__ = (
+    "ShortUrlAlreadyExistsError",
+    "storage",
+)
 
 import logging
 
@@ -31,7 +34,7 @@ class ShortUrlBaseError(Exception):
     """
 
 
-class ShortUrlAlreadyExists(ShortUrlBaseError):
+class ShortUrlAlreadyExistsError(ShortUrlBaseError):
     """
     Raised when a short url on creation already exists
     """
@@ -63,7 +66,7 @@ class ShortUrlsStorage(BaseModel):
             redis.hexists(
                 name=config.REDIS_SHORT_URLS_HASH_NAME,
                 key=slug,
-            )
+            ),
         )
 
     def create(self, short_url_in: ShortUrlCreate) -> ShortUrl:
@@ -77,7 +80,7 @@ class ShortUrlsStorage(BaseModel):
     def create_or_raise_if_exists(self, short_url_in: ShortUrlCreate) -> ShortUrl:
         if not self.exists(short_url_in.slug):
             return self.create(short_url_in)
-        raise ShortUrlAlreadyExists(short_url_in.slug)
+        raise ShortUrlAlreadyExistsError(short_url_in.slug)
 
     def delete_by_slug(self, slug: str) -> None:
         redis.hdel(
