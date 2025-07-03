@@ -13,6 +13,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "mypy>=1.16.1",
+    "pre-commit>=4.2.0",
     "ruff>=0.12.1",
 ]
 
@@ -136,4 +137,3 @@ unfixable = []
 "stuff.py" = [
     "T20",  # flake8-print (T20)
 ]
-
