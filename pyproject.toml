@@ -94,6 +94,7 @@ select = [
     "G",  # flake8-logging-format (G)
     "INP",  # flake8-no-pep420 (INP)
     "PIE",  # flake8-pie (PIE)
+    "T20",  # flake8-print (T20)
     "PYI",  # flake8-pyi (PYI)
     "Q",  # flake8-quotes (Q)
     "RSE",  # flake8-raise (RSE)
