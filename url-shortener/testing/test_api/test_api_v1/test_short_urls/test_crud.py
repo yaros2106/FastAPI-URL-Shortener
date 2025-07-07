@@ -1,5 +1,10 @@
 import random
+from os import getenv
 from unittest import TestCase
+
+if getenv("TESTING") != "1":
+    msg = "Environment is not ready for testing"
+    raise OSError(msg)
 
 
 def total(a: int, b: int) -> int:

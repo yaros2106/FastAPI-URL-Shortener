@@ -54,7 +54,7 @@ class ShortUrlCreateTestCase(TestCase):
     def test_short_url_slug_too_short(self) -> None:
         with self.assertRaises(ValidationError) as exc_info:
             ShortUrlCreate(
-                slug="s" * 100,
+                slug="s",
                 description="some-description",
                 target_url="https://example.com",
             )

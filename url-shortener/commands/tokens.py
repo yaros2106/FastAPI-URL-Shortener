@@ -40,7 +40,7 @@ def check(
 )
 def list_tokens() -> None:
     all_tokens = tokens.get_tokens()
-    if not tokens:
+    if not all_tokens:
         print("[bold red]No tokens found.[/bold red]")
         return
 
