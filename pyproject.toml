@@ -144,3 +144,6 @@ unfixable = []
 "test_crud.py" = [
     "S311"  # suspicious-non-cryptographic-random-usage (S311)
 ]
+"test_create.py" = [
+    "S311"  # suspicious-non-cryptographic-random-usage (S311)
+]
