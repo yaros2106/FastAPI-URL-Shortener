@@ -141,7 +141,7 @@ unfixable = []
 "stuff.py" = [
     "T20",  # flake8-print (T20)
 ]
-"test_crud.py" = [
+"conftest.py" = [
     "S311"  # suspicious-non-cryptographic-random-usage (S311)
 ]
 "test_create.py" = [
