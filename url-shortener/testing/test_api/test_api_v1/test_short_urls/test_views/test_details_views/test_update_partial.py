@@ -11,6 +11,7 @@ from schemas.short_url import ShortUrl
 from testing.conftest import create_short_url_random_slug
 
 
+@pytest.mark.apitest
 class TestUpdatePartial:
     MAX_LEN_DESCRIPTION = 200
 
