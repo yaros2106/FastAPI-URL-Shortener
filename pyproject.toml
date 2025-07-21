@@ -25,10 +25,14 @@ dev = [
 
 [tool.pytest.ini_options]
 minversion = "8.4"
-addopts = "-ra"
+addopts = "-ra --strict-markers"
 log_cli = false
 log_cli_level = "INFO"
 console_output_style = "count"
+
+markers = [
+    "apitest: test any http api call",
+]
 
 # mypy settings
 
