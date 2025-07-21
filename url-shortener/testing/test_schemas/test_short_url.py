@@ -34,8 +34,6 @@ class ShortUrlCreateTestCase(TestCase):
             "http://example.com",
             "http://www.example.com",
             "http://abc.example.com",
-            # "rtmp://video.example.com",
-            # "rtmps://video.example.com",
             "https://abc.example.com/foo/bar/",
         ]
 
