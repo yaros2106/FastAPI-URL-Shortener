@@ -92,5 +92,5 @@ def delete_short_url(
     "/transfer/",
 )
 def transfer_short_url() -> dict[str, str]:
-    raise NotImplementedError
-    # return {"result": "work in progress"}
+    # raise NotImplementedError
+    return {"result": "work in progress"}

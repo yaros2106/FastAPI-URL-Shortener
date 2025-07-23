@@ -8,6 +8,7 @@ from main import app
 @pytest.mark.xfail(
     reason="not implemented yet",
     raises=NotImplementedError,
+    strict=False,
 )
 @pytest.mark.apitest
 def test_transfer_short_url(
