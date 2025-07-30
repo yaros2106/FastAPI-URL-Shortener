@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: My first step in GH Actions
-        run: echo "Hello action!"
+        run: echo "Hello action on ${{ github.event_name }}!"
