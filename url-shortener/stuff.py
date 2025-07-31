@@ -9,9 +9,10 @@ redis = Redis(
     decode_responses=True,
 )
 
+
 def main() -> None:
     a = 1
-    b = 2
+    b = 5
     print(a + b)
     print(redis.ping())
     redis.set("name", "yaros")
