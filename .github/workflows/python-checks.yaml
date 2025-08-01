@@ -26,4 +26,4 @@ jobs:
           pip install "black==25.1.0"
 
       - name: Black 🖤
-        run: black ./
+        run: black --check --diff ./
