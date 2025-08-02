@@ -28,3 +28,23 @@ jobs:
 
       - name: Black 🖤
         run: black --check --diff ./
+
+  list-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install the project
+        run: uv sync --locked --all-extras --dev
+
+      - name: List dependencies
+        run: uv tree
