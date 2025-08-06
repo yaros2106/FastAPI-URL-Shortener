@@ -67,7 +67,6 @@ jobs:
         ports:
           - 6379:6379
 
-
     steps:
       - uses: actions/checkout@v4
 
@@ -87,5 +86,5 @@ jobs:
         run: uv run pytest
         env:
           TESTING: 1
-          REDIS_HOST: redis
+          REDIS_HOST: localhost
           REDIS_PORT: 6379
