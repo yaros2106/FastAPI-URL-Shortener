@@ -6,6 +6,7 @@ class AbstractUsersHelper(ABC):
     Что нужно от обертки:
     - получение пароля по username
     - совпадает ли пароль с переданным username
+    - проверка существования пользователя
     """
 
     @abstractmethod
@@ -52,3 +53,14 @@ class AbstractUsersHelper(ABC):
             password1=db_password,
             password2=password,
         )
+
+    @abstractmethod
+    def user_exists(
+        self,
+        username: str,
+    ) -> bool:
+        """
+        Проверяет, существует ли пользователь в БД.
+        :param username: имя пользователя
+        :return: True если пользователь есть, иначе False
+        """

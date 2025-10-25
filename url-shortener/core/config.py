@@ -20,3 +20,10 @@ REDIS_DB_SHORT_URLS = 3
 
 REDIS_TOKENS_SET_NAME = "tokens"
 REDIS_SHORT_URLS_HASH_NAME = "short-urls"
+
+
+PRIVATE_KEY_PATH: Path = BASE_DIR / "certs" / "jwt-private.pem"
+PUBLIC_KEY_PATH: Path = BASE_DIR / "certs" / "jwt-public.pem"
+ALGORITHM: str = "RS256"
+ACCESS_TOKEN_EXPIRE_MINUTES: int = 15
+REFRESH_TOKEN_EXPIRE_DAYS: int = 30

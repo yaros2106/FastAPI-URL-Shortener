@@ -29,6 +29,9 @@ class RedisUsersHelper(AbstractUsersHelper):
             self.redis.get(username),
         )
 
+    def user_exists(self, username: str) -> bool:
+        return bool(self.redis.exists(username))
+
 
 redis_users = RedisUsersHelper(
     host=config.REDIS_HOST,

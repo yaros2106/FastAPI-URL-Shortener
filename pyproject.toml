@@ -5,7 +5,9 @@ description = "FastAPI URL Shortener"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "bcrypt>=5.0.0",
     "fastapi[standard]>=0.115.12",
+    "pyjwt[crypto]>=2.10.1",
     "redis[hiredis]>=6.2.0",
     "typer>=0.16.0",
 ]
